@@ -1,0 +1,35 @@
+{
+  "name": "mynewvue",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps"
+  },
+  "main": "background.js",
+  "dependencies": {
+    "axios": "^0.23.0",
+    "better-scroll": "^2.4.2",
+    "core-js": "^3.6.5",
+    "qs": "^6.10.1",
+    "url-search-params-polyfill": "^8.1.1",
+    "vue": "^2.6.11",
+    "vue-router": "^3.2.0",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "electron": "^15.3.0",
+    "electron-devtools-installer": "^3.1.0",
+    "electron-packager": "^15.4.0",
+    "sass-loader": "^12.3.0",
+    "vue-cli-plugin-electron-builder": "~2.1.1",
+    "vue-template-compiler": "^2.6.11"
+  }
+}

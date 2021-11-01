@@ -1,0 +1,13 @@
+@import url("normalize.css");
+
+:root{
+	--color-text: #666;
+	--color-high-text: #ff5777;
+	--color-background: #fff;
+	--font-size: 14px;
+	--line-height: 1.5;
+	--border-colo-ofListItem: #e4d4dd;
+}
+body{
+
+}

@@ -1,0 +1,9 @@
+root = true
+
+# Unix-style newlines with a newline ending every file 对于所有的文件  始终在文件末尾插入一个新行
+[*]
+charset = utf-8
+indent-style = space
+trim_trailing_whitespace = true
+end_of_line = lf
+insert_final_newline = true
