@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.worker.rssReader.utils.sql.mapper.MessageRecordMapper">
+    <update id="deleteMessageTable" parameterType="String">
+        DROP TABLE IF exists ${tableName};
+    </update>
+    <update id="createMessageTable" parameterType="String">
+        CREATE TABLE  ${tableName} (
+                `message_id` int(10) not null AUTO_INCREMENT,
+                `message_content` mediumtext not null,
+                `is_read`  TINYINT(1) default  0,
+                primary key(`message_id`)
+                )engine=InnoDB default charset=utf8mb4 COLLATE = utf8mb4_general_ci
+    </update>
+    <insert id="insertMessage" parameterType="xyz.worker.rssReader.pojo.MessageRecord" useGeneratedKeys="true" keyProperty="messageId">
+        INSERT INTO ${messageTable}(
+        `message_content`,`is_read`
+        )values(
+        #{messageContent},false
+        )
+    </insert>
+    <update id="updateMessageIsRead" parameterType="xyz.worker.rssReader.pojo.MessageRecord">
+        update ${messageTable}
+        set `is_read`=1
+        where `message_id`=#{messageId}
+    </update>
+</mapper>

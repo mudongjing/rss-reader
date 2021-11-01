@@ -1,0 +1,2 @@
+首先需要自己准备一个mysql数据库和redis，在application.yaml文件中填写对应的服务器地址信息和密码即可
+

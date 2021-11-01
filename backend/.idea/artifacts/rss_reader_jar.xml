@@ -1,0 +1,88 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="rss-reader:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/rss_reader_jar</output-path>
+    <root id="archive" name="rss-reader.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/../../COMMONOUTdir/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="rss-reader" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/apache/logging/log4j/log4j-to-slf4j/2.14.1/log4j-to-slf4j-2.14.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/data/spring-data-redis/2.5.5/spring-data-redis-2.5.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/thymeleaf/thymeleaf/3.0.12.RELEASE/thymeleaf-3.0.12.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/spring-aop/5.3.10/spring-aop-5.3.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/com/fasterxml/jackson/core/jackson-core/2.12.5/jackson-core-2.12.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/jdom/jdom2/2.0.6/jdom2-2.0.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/com/rometools/rome-utils/1.15.0/rome-utils-1.15.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/boot/spring-boot-starter-data-redis/2.5.5/spring-boot-starter-data-redis-2.5.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/tk/mybatis/mapper-core/1.1.5/mapper-core-1.1.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/boot/spring-boot-devtools/2.5.5/spring-boot-devtools-2.5.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/boot/spring-boot/2.5.5/spring-boot-2.5.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/spring-jcl/5.3.10/spring-jcl-5.3.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/spring-webmvc/5.3.10/spring-webmvc-5.3.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/spring-oxm/5.3.10/spring-oxm-5.3.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/spring-context/5.3.10/spring-context-5.3.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/spring-core/5.3.10/spring-core-5.3.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/attoparser/attoparser/2.0.5.RELEASE/attoparser-2.0.5.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/data/spring-data-keyvalue/2.5.5/spring-data-keyvalue-2.5.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/boot/spring-boot-starter-jdbc/2.5.5/spring-boot-starter-jdbc-2.5.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/apache/logging/log4j/log4j-api/2.14.1/log4j-api-2.14.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/spring-jdbc/5.3.10/spring-jdbc-5.3.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/boot/spring-boot-starter-web/2.5.5/spring-boot-starter-web-2.5.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/com/rometools/rome/1.15.0/rome-1.15.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/spring-tx/5.3.10/spring-tx-5.3.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/javax/persistence/persistence-api/1.0/persistence-api-1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/data/spring-data-commons/2.5.5/spring-data-commons-2.5.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/spring-beans/5.3.10/spring-beans-5.3.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/apache/tomcat/embed/tomcat-embed-el/9.0.53/tomcat-embed-el-9.0.53.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/boot/spring-boot-starter/2.5.5/spring-boot-starter-2.5.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/tk/mybatis/mapper-base/1.1.5/mapper-base-1.1.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/mybatis/mybatis-spring/2.0.6/mybatis-spring-2.0.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/boot/spring-boot-starter-json/2.5.5/spring-boot-starter-json-2.5.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/io/netty/netty-handler/4.1.68.Final/netty-handler-4.1.68.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/com/alibaba/fastjson/1.2.75/fastjson-1.2.75.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/mysql/mysql-connector-java/8.0.26/mysql-connector-java-8.0.26.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/spring-web/5.3.10/spring-web-5.3.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/io/netty/netty-transport/4.1.68.Final/netty-transport-4.1.68.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/jakarta/annotation/jakarta.annotation-api/1.3.5/jakarta.annotation-api-1.3.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/io/projectreactor/reactor-core/3.4.10/reactor-core-3.4.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/ch/qos/logback/logback-core/1.2.6/logback-core-1.2.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/io/netty/netty-buffer/4.1.68.Final/netty-buffer-4.1.68.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/com/fasterxml/jackson/module/jackson-module-parameter-names/2.12.5/jackson-module-parameter-names-2.12.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/apache/tomcat/embed/tomcat-embed-core/9.0.53/tomcat-embed-core-9.0.53.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/mybatis/spring/boot/mybatis-spring-boot-autoconfigure/2.2.0/mybatis-spring-boot-autoconfigure-2.2.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/slf4j/jul-to-slf4j/1.7.32/jul-to-slf4j-1.7.32.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/boot/spring-boot-starter-thymeleaf/2.5.5/spring-boot-starter-thymeleaf-2.5.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/spring-context-support/5.3.10/spring-context-support-5.3.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/spring-expression/5.3.10/spring-expression-5.3.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/thymeleaf/thymeleaf-spring5/3.0.12.RELEASE/thymeleaf-spring5-3.0.12.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/tk/mybatis/mapper-weekend/1.1.5/mapper-weekend-1.1.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.12.5/jackson-datatype-jsr310-2.12.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/boot/spring-boot-starter-logging/2.5.5/spring-boot-starter-logging-2.5.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/ch/qos/logback/logback-classic/1.2.6/logback-classic-1.2.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/io/netty/netty-codec/4.1.68.Final/netty-codec-4.1.68.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/tk/mybatis/mapper-spring-boot-autoconfigure/2.1.5/mapper-spring-boot-autoconfigure-2.1.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/com/fasterxml/jackson/core/jackson-databind/2.12.5/jackson-databind-2.12.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/thymeleaf/extras/thymeleaf-extras-java8time/3.0.4.RELEASE/thymeleaf-extras-java8time-3.0.4.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/mybatis/mybatis/3.5.7/mybatis-3.5.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/projectlombok/lombok/1.18.20/lombok-1.18.20.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/mybatis/spring/boot/mybatis-spring-boot-starter/2.2.0/mybatis-spring-boot-starter-2.2.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/io/netty/netty-resolver/4.1.68.Final/netty-resolver-4.1.68.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/apache/tomcat/embed/tomcat-embed-websocket/9.0.53/tomcat-embed-websocket-9.0.53.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/com/zaxxer/HikariCP/4.0.3/HikariCP-4.0.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/tk/mybatis/mapper-spring-boot-starter/2.1.5/mapper-spring-boot-starter-2.1.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/tk/mybatis/mapper-spring/1.1.5/mapper-spring-1.1.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/tk/mybatis/mapper-extra/1.1.5/mapper-extra-1.1.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/yaml/snakeyaml/1.28/snakeyaml-1.28.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/boot/spring-boot-starter-tomcat/2.5.5/spring-boot-starter-tomcat-2.5.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/io/lettuce/lettuce-core/6.1.5.RELEASE/lettuce-core-6.1.5.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/org/springframework/boot/spring-boot-autoconfigure/2.5.5/spring-boot-autoconfigure-2.5.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/io/netty/netty-common/4.1.68.Final/netty-common-4.1.68.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.12.5/jackson-datatype-jdk8-2.12.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/com/fasterxml/jackson/core/jackson-annotations/2.12.5/jackson-annotations-2.12.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/noinstalled/maven-repos/com/google/code/gson/gson/2.8.8/gson-2.8.8.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

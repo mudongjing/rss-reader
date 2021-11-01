@@ -1,0 +1,27 @@
+server:
+  port: 8110
+
+spring:
+  mvc:
+    view:
+      suffix: .html
+      prefix: /templatets/
+  thymeleaf:
+    cache: false
+  datasource:
+    username: 
+    password: 
+    url:
+redis:
+  port: 
+  host: 
+  password: 
+  dbs: 0,1,2,3,4,5,6,7,8,9
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: xyz.worker.rssreader.pojo
+  mapper-locations: classpath:/mybatis/*.xml
+logging:
+  level:
+    xyz.worker.rssReader: debug

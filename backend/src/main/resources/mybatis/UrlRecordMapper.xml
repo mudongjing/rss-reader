@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.worker.rssReader.utils.sql.mapper.UrlRecordMapper">
+    <insert id="addUrl" parameterType="xyz.worker.rssReader.pojo.UrlRecord" useGeneratedKeys="true" keyProperty="urlId">
+        INSERT INTO `url_table`(
+        `url_content`,`url_level`
+        )values(
+        #{urlContent},#{urlLevel}
+        )
+    </insert>
+    <update id="dropUrlTable">
+        drop table if exists `url_table`
+    </update>
+    <update id="createUrlTable">
+        create table if not exists `url_table`(
+            `url_id` int(10) not null auto_increment,
+            `url_content` varchar(510) not null,
+            `url_level` int(10) not null,
+            primary key(`url_id`)
+        )engine=InnoDB default charset=utf8
+    </update>
+</mapper>
