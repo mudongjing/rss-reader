@@ -1,10 +1,8 @@
 package xyz.worker.rssReader.utils.redis.utils;
 
-import org.omg.PortableServer.POA;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import xyz.worker.rssReader.pojo.DefineTableName;
@@ -16,7 +14,7 @@ import xyz.worker.rssReader.utils.redis.RedisConfigFactory;
 import xyz.worker.rssReader.utils.sql.service.MessageRecordService;
 import xyz.worker.rssReader.utils.sql.service.UrlRecordService;
 
-import java.util.List;
+import javax.annotation.PostConstruct;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -24,7 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class UrlRecordRedis {
     private static final Logger logger=LoggerFactory.getLogger(UrlRecordRedis.class);
-    private AtomicInteger atomicInteger=new AtomicInteger(0);
+    private AtomicInteger atomicInteger;
     @Autowired
     private DefineTableName defineTableName;
     @Autowired
@@ -39,6 +37,18 @@ public class UrlRecordRedis {
     private MessageRecordService messageRecordService;
     @Autowired
     private MessageRecordRedis messageRecordRedis;
+
+    @PostConstruct
+    public void init(){
+        RedisTemplate<String, Object> redisTemplateInitnumber = redisConfigFactory.getRedisTemplateByDb(pointDB.INITNUMBER);
+        if (redisTemplateInitnumber.hasKey(defineTableName.INIT_NUMBER)){
+            Integer initNumber =(Integer)redisTemplateInitnumber.opsForValue().get(defineTableName.INIT_NUMBER);
+            atomicInteger=new AtomicInteger(initNumber);
+        }else{
+            atomicInteger=new AtomicInteger(0);
+            redisTemplateInitnumber.opsForValue().set(defineTableName.INIT_NUMBER,0);
+        }
+    }
 
     public String getUrlFromId(String id){
         RedisTemplate<String,Object> redisTemplate=redisConfigFactory.getRedisTemplate();
@@ -58,9 +68,12 @@ public class UrlRecordRedis {
         int add = urlRecordService.add(url, level);
         if(add!=-1){
             RedisTemplate<String,Object> redisTemplate=redisConfigFactory.getRedisTemplate();
+            RedisTemplate<String, Object> redisTemplateInitNumber = redisConfigFactory.getRedisTemplateByDb(pointDB.INITNUMBER);
             UrlRecord urlRecord=new UrlRecord(add,url,level);
             // redis 添加
-            redisTemplate.opsForHash().put(defineTableName.URL_TABLE,atomicInteger.incrementAndGet()+"",urlRecord);
+            Integer initNumber=atomicInteger.incrementAndGet();
+            redisTemplate.opsForHash().put(defineTableName.URL_TABLE,initNumber+"",urlRecord);
+            redisTemplateInitNumber.opsForValue().set(defineTableName.INIT_NUMBER,initNumber);
             String tableName= utilsOfString.removeHttpOfUrl(url);
             if(messageRecordService.createTable(tableName)){
                 messageRecordRedis.getAndInsertMessageFromUrl(urlRecord,true);
