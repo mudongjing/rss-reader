@@ -10,7 +10,9 @@ import xyz.worker.rssReader.utils.sql.mapper.UrlRecordMapper;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 
 @Component
@@ -37,17 +39,18 @@ public class GetRss {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                SimpleDateFormat sdf = new SimpleDateFormat();
+                sdf.applyPattern("yyyy-MM-dd HH:mm:ss a");
+                Date date = new Date();
+                System.out.println("时间："+sdf.format(date)+"---------");
                 Map<Object, Object> show = urlRecordRedis.show();
                 Collection<Object> values = show.values();
-                //System.out.println("开始遍历rss");
-                values.forEach(v->{
-                    messageRecordRedis.getAndInsertMessageFromUrl((UrlRecord) v,false);
-                });
+                values.forEach(v->{ messageRecordRedis.getAndInsertMessageFromUrl((UrlRecord) v,false,null);});
             }
         }).start();
     }
     public void dropAndCreateUrlTable(){
-        urlRecordMapper.dropUrlTable();
+//        urlRecordMapper.dropUrlTable();
         urlRecordMapper.createUrlTable();
     }
 }

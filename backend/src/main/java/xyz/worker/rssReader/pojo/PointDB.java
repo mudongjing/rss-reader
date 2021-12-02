@@ -10,4 +10,6 @@ public class PointDB {
     public Integer LOGO=4; // 负责存储rss源对应的Logo的url地址
     public Integer TITLE=5; // 存储rss源对应的标题名
     public Integer LEVEL=6; // rss对应的级别
+    public Integer INITNUMBER=7; // 原子整数的初始数值设置
+    public Integer FILTER=8; // 存放过滤器
 }

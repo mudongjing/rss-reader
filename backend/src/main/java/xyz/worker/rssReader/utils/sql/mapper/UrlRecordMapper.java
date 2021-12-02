@@ -9,4 +9,5 @@ public interface UrlRecordMapper extends BaseMapper<UrlRecord> {
     int addUrl(UrlRecord urlRecord);
     void dropUrlTable();
     void createUrlTable();
+    String selectForUrl(String url);
 }

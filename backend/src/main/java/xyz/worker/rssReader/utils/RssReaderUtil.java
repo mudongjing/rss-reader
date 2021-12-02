@@ -29,7 +29,8 @@ public class RssReaderUtil {
     private UtilsOfString utilsOfString;
 
 //    @SneakyThrows
-    public List<RssPojo> getRssFromUrl(String url){
+    // 获取信息源内部消息的同时，顺便有初始化redis中关于信息源的相关设置功能
+    public List<RssPojo> getRssFromUrl(String url,String title){
         URLConnection conn= null;
         try {
             conn = new URL(url).openConnection();
@@ -49,9 +50,20 @@ public class RssReaderUtil {
             String tableName=utilsOfString.removeHttpOfUrl(url);
             if(feed.getTitle()!=null){
                 RedisTemplate<String,Object> redisTemplateTitle=redisConfigFactory.getRedisTemplateByDb(pointDB.TITLE);
+                // 如果对应的信息源没有设置名字，就主动添加
                 if(!redisTemplateTitle.hasKey(tableName)){
-                    if(!feed.getTitle().replace(" ","").equals("") && feed.getTitle()!=null) redisTemplateTitle.opsForValue().set(tableName,feed.getTitle());
-                    else redisTemplateTitle.opsForValue().set(tableName,utilsOfString.removeHttpOfUrl(url));
+                    if (title!=null || !title.replace(" ","").equals("")) {
+                        redisTemplateTitle.opsForValue().set(tableName,title);
+                        System.out.println("添加信息源："+tableName+" 附带自定义标题："+title);
+                    }
+                    else if(!feed.getTitle().replace(" ","").equals("") && feed.getTitle()!=null) {
+                        redisTemplateTitle.opsForValue().set(tableName,feed.getTitle());
+                        System.out.println("添加信息源："+tableName+" 自带标题："+feed.getTitle());
+                    }
+                    else {
+                        redisTemplateTitle.opsForValue().set(tableName,utilsOfString.removeHttpOfUrl(url));
+                        System.out.println("添加信息源："+tableName+" 无标题");
+                    }
                 }
             }
             if(feed.getImage()!=null){

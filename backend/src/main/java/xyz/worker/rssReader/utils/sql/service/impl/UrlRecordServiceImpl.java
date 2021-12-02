@@ -35,4 +35,9 @@ public class UrlRecordServiceImpl implements UrlRecordService {
         List<UrlRecord> urlRecords = urlRecordMapper.selectAll();
         return urlRecords;
     }
+
+    @Override
+    public String search(String s) {
+        return urlRecordMapper.selectForUrl(s);
+    }
 }

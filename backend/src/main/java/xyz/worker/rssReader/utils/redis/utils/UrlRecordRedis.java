@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
+import xyz.worker.rssReader.filter.MyFilter;
+import xyz.worker.rssReader.filter.RequestMess;
 import xyz.worker.rssReader.pojo.DefineTableName;
 import xyz.worker.rssReader.pojo.PointDB;
 import xyz.worker.rssReader.pojo.UrlRecord;
@@ -37,7 +39,8 @@ public class UrlRecordRedis {
     private MessageRecordService messageRecordService;
     @Autowired
     private MessageRecordRedis messageRecordRedis;
-
+    @Autowired
+    private MyFilter myFilter;
     @PostConstruct
     public void init(){
         RedisTemplate<String, Object> redisTemplateInitnumber = redisConfigFactory.getRedisTemplateByDb(pointDB.INITNUMBER);
@@ -56,17 +59,48 @@ public class UrlRecordRedis {
         return o.getUrlContent();
     }
     /**
-     * 需要rss对应的hrrp地址，以及自己设置的处理级别，level越大则级别越低，需要更久的时间才会提取一次
+     * 需要rss对应的http地址，以及自己设置的处理级别，level越大则级别越低，需要更久的时间才会提取一次
      * 比如一些rss源并不会高频率更新，或者即使更新快，但是我方的网络方面不一定通畅，导致一次获取耗时过长
      * @param url
      * @param level
      * @return
      */
-    public Boolean add(String url,Integer level){
+//    public Boolean add(String url,Integer level){
+//        if(level==null) level=1;
+//        //数据库添加
+//        int add = urlRecordService.add(url, level);
+//        if(add!=-1){
+//            RedisTemplate<String,Object> redisTemplate=redisConfigFactory.getRedisTemplate();
+//            RedisTemplate<String, Object> redisTemplateInitNumber = redisConfigFactory.getRedisTemplateByDb(pointDB.INITNUMBER);
+//            UrlRecord urlRecord=new UrlRecord(add,url,level);
+//            // redis 添加
+//            Integer initNumber=atomicInteger.incrementAndGet();
+//            redisTemplate.opsForHash().put(defineTableName.URL_TABLE,initNumber+"",urlRecord);
+//            redisTemplateInitNumber.opsForValue().set(defineTableName.INIT_NUMBER,initNumber);
+//            String tableName= utilsOfString.removeHttpOfUrl(url);
+//            if(messageRecordService.createTable(tableName)){
+//                messageRecordRedis.getAndInsertMessageFromUrl(urlRecord,true);
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+    public Boolean add(String url,Integer level,String title){
         if(level==null) level=1;
+        // 检测重复性
+        boolean hasUrl = myFilter.judgeHas(url);
+        if (hasUrl) {
+            System.out.println("新添加的url "+url+" 已存在");
+            // 确实存在
+            if(urlRecordService.search(url)!=null) return false;
+        }
         //数据库添加
         int add = urlRecordService.add(url, level);
         if(add!=-1){
+            // 添加到过滤器中
+            RequestMess requestMess = myFilter.addEle(url, false);
+            if (requestMess.getSucc().booleanValue()==false) System.out.println(requestMess.getMess());
+            // 信息源记录
             RedisTemplate<String,Object> redisTemplate=redisConfigFactory.getRedisTemplate();
             RedisTemplate<String, Object> redisTemplateInitNumber = redisConfigFactory.getRedisTemplateByDb(pointDB.INITNUMBER);
             UrlRecord urlRecord=new UrlRecord(add,url,level);
@@ -76,7 +110,7 @@ public class UrlRecordRedis {
             redisTemplateInitNumber.opsForValue().set(defineTableName.INIT_NUMBER,initNumber);
             String tableName= utilsOfString.removeHttpOfUrl(url);
             if(messageRecordService.createTable(tableName)){
-                messageRecordRedis.getAndInsertMessageFromUrl(urlRecord,true);
+                messageRecordRedis.getAndInsertMessageFromUrl(urlRecord,true,title);
                 return true;
             }
         }

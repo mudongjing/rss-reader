@@ -8,4 +8,5 @@ public interface UrlRecordService {
     int add(String url,Integer level);
     Boolean delete(Integer id);
     List<UrlRecord> show();
+    String search(String s);
 }
