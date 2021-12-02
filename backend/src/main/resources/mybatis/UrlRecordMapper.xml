@@ -19,4 +19,7 @@
             primary key(`url_id`)
         )engine=InnoDB default charset=utf8
     </update>
+    <select id="selectForUrl" parameterType="String" resultType="xyz.worker.rssReader.pojo.UrlRecord">
+        select `url_content` from `url_table` where `url_content`=#{s}
+    </select>
 </mapper>
