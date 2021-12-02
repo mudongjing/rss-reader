@@ -7,5 +7,5 @@ import org.springframework.stereotype.Component;
 @Data
 public class Renew {
     // 默认5分钟遍历一次
-    private Integer renewGap=1800000;
+    private Integer renewGap=120000;
 }
