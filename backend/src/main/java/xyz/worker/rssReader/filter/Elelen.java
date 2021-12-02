@@ -11,7 +11,7 @@ public class Elelen {
     private static int LASTELEMS=1 << (ele+1);
     private static int  CAPCITY=1 << (lay+ele);
     private static int LASTCAPCITY=1 << (lay+ele+1);
-    private static int QUEUECAP=1;
+    private static int QUEUECAP=3;
 
     public static int getLAYERS() {
         return LAYERS;

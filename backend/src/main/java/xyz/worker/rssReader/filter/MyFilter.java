@@ -77,6 +77,7 @@ public class MyFilter {
     private String STOP="stop";
     private String PURE="pure";
     private String LAST="last";
+    private String SUCC="success";
 
     @PostConstruct
     public void init(){
@@ -190,7 +191,7 @@ public class MyFilter {
             if (!b) { return new RequestMess(false,LIMIT); }
             res.add(v);
             nParity = judgeParity(v);
-           // System.out.println(s+" 奇偶 ： "+nParity +" 初始 ： "+parity);
+//            System.out.println(s+" 奇偶 ： "+nParity +" 初始 ： "+parity);
             // 前两次亿满足条件，看当前是否符合，如果是，再看后一次
             Integer v1=null;
             Boolean mParity=null;
@@ -202,12 +203,13 @@ public class MyFilter {
                     indexAndAli = utilsOfFilter.hashS(s, indexAndAli.getS(), indexAndAli.getIndex());
                     v1=getHashOfStr(indexAndAli);
                     mParity=judgeParity(v1);
-                    //System.out.println(s+" 奇偶 ： "+mParity +" 初始 ： "+parity);
+//                    System.out.println(s+" 奇偶 ： "+mParity +" 初始 ： "+parity);
                     if (mParity.booleanValue()!=parity){
                         // 达到停留条件
                         mb = setStop(lay, v,res,parity);// 未出现冲突
                         if (mb) {
                             if (!batch){ saveB();  }
+                            succSave(s);
                             return new RequestMess(true,null);
                         }
                         else return new RequestMess(false,CONFLICT);// 出现冲突，失败
@@ -234,6 +236,14 @@ public class MyFilter {
         filterRedis.opsForValue().set(PURE,pure);
         filterRedis.opsForValue().set(LAST,last);
     }
+    private void succSave(String s){
+        RedisTemplate<String, Object> filterRedis = redisConfigFactory.getRedisTemplateByDb(pointDB.FILTER);
+        filterRedis.opsForSet().add(SUCC,s);
+    }
+    private boolean wasSucc(String s){
+        RedisTemplate<String, Object> filterRedis = redisConfigFactory.getRedisTemplateByDb(pointDB.FILTER);
+        return filterRedis.opsForSet().isMember(SUCC,s);
+    }
     private boolean isALL(Queue<Boolean> queue,boolean is){
         if (queue.size()==Elelen.getQUEUECAP()){
             for (Boolean q:queue){ if (q.booleanValue()==is) return false; }
@@ -246,7 +256,8 @@ public class MyFilter {
     //先找自己的停留点
     // 顺便如果自己的经历点还是纯洁的，则表明可以删除
     // 逐个计算
-    public boolean delEle(String s){
+    public void delEle(String s){
+        if (!wasSucc(s)) return ;
         IndexAndAli indexAndAli = utilsOfFilter.hashS(s, null, null);
         List<Integer> res=new ArrayList<>();
         int v=getHashOfStr(indexAndAli);
@@ -278,9 +289,7 @@ public class MyFilter {
                         if (last.get(oneDi) && stop.get(calcuLE(lay,v))) {
                             delLastPoint(lay,v,oneDi);
                             saveB();
-                            return true;
                         }
-                        else return false;
                     }
                 }
             }

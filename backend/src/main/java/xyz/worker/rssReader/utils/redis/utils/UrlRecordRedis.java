@@ -85,21 +85,22 @@ public class UrlRecordRedis {
 //        }
 //        return false;
 //    }
-    public Boolean add(String url,Integer level,String title){
+    public RequestMess add(String url,Integer level,String title){
         if(level==null) level=1;
         // 检测重复性
-        boolean hasUrl = myFilter.judgeHas(url);
+        boolean hasUrl = myFilter.judgeHas(utilsOfString.removeHttpOfUrl(url));
         if (hasUrl) {
             System.out.println("新添加的url "+url+" 已存在");
             // 确实存在
-            if(urlRecordService.search(url)!=null) return false;
+            if(urlRecordService.search(url)!=null) return new RequestMess(false,url+" 已存在");
         }
         //数据库添加
         int add = urlRecordService.add(url, level);
         if(add!=-1){
             // 添加到过滤器中
             RequestMess requestMess = myFilter.addEle(url, false);
-            if (requestMess.getSucc().booleanValue()==false) System.out.println(requestMess.getMess());
+            String mess=null;
+            if (requestMess.getSucc().booleanValue()==false) mess="过滤器发生："+requestMess.getMess();
             // 信息源记录
             RedisTemplate<String,Object> redisTemplate=redisConfigFactory.getRedisTemplate();
             RedisTemplate<String, Object> redisTemplateInitNumber = redisConfigFactory.getRedisTemplateByDb(pointDB.INITNUMBER);
@@ -111,10 +112,10 @@ public class UrlRecordRedis {
             String tableName= utilsOfString.removeHttpOfUrl(url);
             if(messageRecordService.createTable(tableName)){
                 messageRecordRedis.getAndInsertMessageFromUrl(urlRecord,true,title);
-                return true;
+                return new RequestMess(true,mess);
             }
         }
-        return false;
+        return new RequestMess(false,"添加数据库失败");
     }
     public Boolean delete(String id){
         RedisTemplate<String,Object> redisTemplate=redisConfigFactory.getRedisTemplate();
@@ -124,6 +125,7 @@ public class UrlRecordRedis {
         String tableName=utilsOfString.removeHttpOfUrl(value.getUrlContent());
         messageRecordService.deleteTable(tableName);
         if(delete){
+            myFilter.delEle(tableName);
             redisTemplate.opsForHash().delete(defineTableName.URL_TABLE,id);
             messageRecordRedis.dropNowMess(tableName);
             return true;

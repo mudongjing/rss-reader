@@ -3,6 +3,7 @@ package xyz.worker.rssReader.mvc;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import xyz.worker.rssReader.filter.RequestMess;
 import xyz.worker.rssReader.pojo.tmp.UrlTitleAndLogo;
 import xyz.worker.rssReader.utils.redis.utils.UrlRecordRedis;
 
@@ -15,8 +16,8 @@ public class URLController {
     private UrlRecordRedis urlRecordRedis;
 
     @PostMapping("/url/add")
-    public Boolean addUrl(@RequestParam("url") String url,@RequestParam("level") Integer level,
-                          @RequestParam("title")String title){
+    public RequestMess addUrl(@RequestParam("url") String url, @RequestParam("level") Integer level,
+                              @RequestParam("title")String title){
         return urlRecordRedis.add(url,level,title);
     }
 
