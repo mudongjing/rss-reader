@@ -4,7 +4,7 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 public class Elelen {
-    private static int lay=12;
+    private static int lay=10;
     private static int ele=8;
     private static int LAYERS=1 << lay;
     private static int ELEMS=1 << ele;

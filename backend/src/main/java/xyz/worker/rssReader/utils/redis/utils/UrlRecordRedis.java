@@ -100,7 +100,7 @@ public class UrlRecordRedis {
             // 添加到过滤器中
             RequestMess requestMess = myFilter.addEle(url, false);
             String mess=null;
-            if (requestMess.getSucc().booleanValue()==false) mess="过滤器发生："+requestMess.getMess();
+            if (requestMess.getSuccss().booleanValue()==false) mess="过滤器发生："+requestMess.getMess();
             // 信息源记录
             RedisTemplate<String,Object> redisTemplate=redisConfigFactory.getRedisTemplate();
             RedisTemplate<String, Object> redisTemplateInitNumber = redisConfigFactory.getRedisTemplateByDb(pointDB.INITNUMBER);

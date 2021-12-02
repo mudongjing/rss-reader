@@ -144,7 +144,7 @@ public class MyFilter {
     public void batchAddEle(String [] ss){
         for(String s:ss) {
             RequestMess requestMess = addEle(s, true);
-            if (requestMess.getSucc().booleanValue()==true){ System.out.println("过滤器加载 "+s+" 成功");
+            if (requestMess.getSuccss().booleanValue()==true){ System.out.println("过滤器加载 "+s+" 成功");
             }else{ System.out.println("过滤器加载 "+s+" 失败 ："+requestMess.getMess()); }
         }
     }
