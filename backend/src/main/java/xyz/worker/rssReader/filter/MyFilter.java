@@ -1,5 +1,7 @@
 package xyz.worker.rssReader.filter;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -83,15 +85,16 @@ public class MyFilter {
     public void init(){
         RedisTemplate<String, Object> filterRedis = redisConfigFactory.getRedisTemplateByDb(pointDB.FILTER);
         if (building.size()==0){
-            filterRedis = redisConfigFactory.getRedisTemplateByDb(pointDB.FILTER);
-            if (filterRedis.hasKey(FILTERLIST) && filterRedis.hasKey(PURE) && filterRedis.hasKey(STOP) && filterRedis.hasKey(LAST) ){
-                building = (List<BitSet>)filterRedis.opsForValue().get(FILTERLIST);
-                pure=(BitSet) filterRedis.opsForValue().get(PURE);
-                stop=(BitSet) filterRedis.opsForValue().get(STOP);
-                last=(BitSet) filterRedis.opsForValue().get(LAST);
-            }else{
+//            filterRedis = redisConfigFactory.getRedisTemplateByDb(pointDB.FILTER);
+//            if (filterRedis.hasKey(FILTERLIST) && filterRedis.hasKey(PURE) && filterRedis.hasKey(STOP) && filterRedis.hasKey(LAST) ){
+//                JSONObject.toJavaObject(,List.class)
+//                building = (List<BitSet>)filterRedis.opsForValue().get(FILTERLIST);
+//                pure=(BitSet) filterRedis.opsForValue().get(PURE);
+//                stop=(BitSet) filterRedis.opsForValue().get(STOP);
+//                last=(BitSet) filterRedis.opsForValue().get(LAST);
+//            }else{
                 for (int i=5;i>0;i--)building.add(new BitSet(Elelen.getELEMS()));
-            }
+//            }
         }
         List<UrlRecord> urlRecords = urlRecordService.show();
         String [] urls=new String[urlRecords.size()];
@@ -165,6 +168,7 @@ public class MyFilter {
     }
     // 将一个字符串元素添加到过滤器中
     public RequestMess addEle(String s,boolean batch){
+        if (judgeHas(s)) return new RequestMess(false,CONFLICT);
         IndexAndAli indexAndAli = utilsOfFilter.hashS(s, null, null);
         // 之后的判断奇偶性，true为偶，false为奇
 
@@ -208,7 +212,7 @@ public class MyFilter {
                         // 达到停留条件
                         mb = setStop(lay, v,res,parity);// 未出现冲突
                         if (mb) {
-                            if (!batch){ saveB();  }
+                            //if (!batch){ saveB();  }
                             succSave(s);
                             return new RequestMess(true,null);
                         }
@@ -230,11 +234,12 @@ public class MyFilter {
         }
     }
     private void saveB(){
+
         RedisTemplate<String, Object> filterRedis = redisConfigFactory.getRedisTemplateByDb(pointDB.FILTER);
-        filterRedis.opsForValue().set(FILTERLIST,building);
-        filterRedis.opsForValue().set(STOP,stop);
-        filterRedis.opsForValue().set(PURE,pure);
-        filterRedis.opsForValue().set(LAST,last);
+        filterRedis.opsForValue().set(FILTERLIST,JSONObject.toJSONString(building));
+        filterRedis.opsForValue().set(STOP,JSONObject.toJSONString(stop));
+        filterRedis.opsForValue().set(PURE,JSONObject.toJSONString(pure));
+        filterRedis.opsForValue().set(LAST,JSONObject.toJSONString(last));
     }
     private void succSave(String s){
         RedisTemplate<String, Object> filterRedis = redisConfigFactory.getRedisTemplateByDb(pointDB.FILTER);

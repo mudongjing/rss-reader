@@ -48,24 +48,25 @@ public class RssReaderUtil {
             finally { if (feed==null) return stringList; }
 
             String tableName=utilsOfString.removeHttpOfUrl(url);
-            if(feed.getTitle()!=null){
-                RedisTemplate<String,Object> redisTemplateTitle=redisConfigFactory.getRedisTemplateByDb(pointDB.TITLE);
-                // 如果对应的信息源没有设置名字，就主动添加
-                if(!redisTemplateTitle.hasKey(tableName)){
-                    if (title!=null || !title.replace(" ","").equals("")) {
-                        redisTemplateTitle.opsForValue().set(tableName,title);
-                        System.out.println("添加信息源："+tableName+" 附带自定义标题："+title);
-                    }
-                    else if(!feed.getTitle().replace(" ","").equals("") && feed.getTitle()!=null) {
-                        redisTemplateTitle.opsForValue().set(tableName,feed.getTitle());
-                        System.out.println("添加信息源："+tableName+" 自带标题："+feed.getTitle());
-                    }
-                    else {
-                        redisTemplateTitle.opsForValue().set(tableName,utilsOfString.removeHttpOfUrl(url));
+            RedisTemplate<String,Object> redisTemplateTitle=redisConfigFactory.getRedisTemplateByDb(pointDB.TITLE);
+            if (!redisTemplateTitle.hasKey(tableName)){
+                System.out.println(tableName+ " 初次加入");
+                if (title!=null && !title.replace(" ","").equals("")){
+                    redisTemplateTitle.opsForValue().set(tableName,title);
+                    System.out.println("添加信息源："+tableName+" 附带自定义标题："+title);
+                }else{
+                    if(feed.getTitle()!=null){
+                         if(!feed.getTitle().replace(" ","").equals("")) {
+                            redisTemplateTitle.opsForValue().set(tableName,feed.getTitle());
+                            System.out.println("添加信息源："+tableName+" 自带标题："+feed.getTitle());
+                         }
+                    }else {
+                        redisTemplateTitle.opsForValue().set(tableName,tableName);
                         System.out.println("添加信息源："+tableName+" 无标题");
                     }
                 }
             }
+
             if(feed.getImage()!=null){
                 RedisTemplate<String,Object> redisTemplateLogo=redisConfigFactory.getRedisTemplateByDb(pointDB.LOGO);
                 if(!redisTemplateLogo.hasKey(tableName)){ redisTemplateLogo.opsForValue().set(tableName,feed.getImage().getUrl()); }

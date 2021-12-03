@@ -119,6 +119,7 @@ public class UrlRecordRedis {
     }
     public Boolean delete(String id){
         RedisTemplate<String,Object> redisTemplate=redisConfigFactory.getRedisTemplate();
+        RedisTemplate<String, Object> titleRedis = redisConfigFactory.getRedisTemplateByDb(pointDB.TITLE);
         UrlRecord value = (UrlRecord)redisTemplate.opsForHash().get(defineTableName.URL_TABLE,id);
         if(value==null) return false;
         Boolean delete = urlRecordService.delete(value.getUrlId());
@@ -128,6 +129,7 @@ public class UrlRecordRedis {
             myFilter.delEle(tableName);
             redisTemplate.opsForHash().delete(defineTableName.URL_TABLE,id);
             messageRecordRedis.dropNowMess(tableName);
+            titleRedis.delete(tableName);
             return true;
         }
         return false;
